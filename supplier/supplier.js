@@ -22,7 +22,7 @@ function start() {
     const authToken = localStorage.getItem('authToken');
     if (!authToken) {
         alert("Please, login")
-        window.location.href = '/home.html'; // Redirect to login page
+        window.location.href = '/index.html'; // Redirect to login page
     }
     Promise.all([totalPages])
     .then(([totalPages]) => {
@@ -40,7 +40,7 @@ function start() {
     logoutBtn.onclick = () => {
         localStorage.removeItem('authToken');
         alert("Logged out!");
-        window.location.href = '/home.html'; // Redirect to login page
+        window.location.href = '/index.html'; // Redirect to login page
     }
 }
 
