@@ -1,0 +1,311 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+*{
+    margin: 0;
+    padding: 0.1px;
+    box-sizing: border-box;
+}
+
+body{
+    height: auto;
+    font-family: 'Poppins', sans-serif;
+}
+
+.header{
+    background-color: #04364A;
+    color: white;
+    font-weight: bold;
+    height: 100px;
+}
+
+.name{
+    padding-top: 5px;
+    font-size: 50px;
+    padding-left: 90px;
+    color: chartreuse; /* Thay đổi giá trị này thành màu đen */
+    text-decoration: none;
+}
+
+.intro{
+    padding: 15px;
+    cursor: pointer;
+    float: left;
+    width: 40%;
+}
+
+.pages{
+    float: right;
+    width: 60%;
+}
+
+.warehouse,
+.staff,
+.supplier,
+.product,
+.homepage,
+.goods-delivery-note,
+.goods-received-note{
+    text-align: center;
+    width: 130px;
+    height: 30px;
+    background-color: chartreuse;
+    border-radius: 100px;
+}
+
+.home{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    padding: 40px 100px;
+    cursor: pointer;
+}
+
+.container {
+    width: 500px;
+    margin: 50px 678px;
+}
+
+.input-container{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    justify-content: center;
+    align-items: center;
+}
+
+form {
+    background-color: #04364A;
+    border: 1px solid #ccc;
+    padding: 20px;
+    border-radius: 20px;
+}
+
+label {
+    color:chartreuse;
+    display: block;
+    margin-bottom: 10px;
+    font-size: bold;
+    margin-top: 10px;
+}
+
+input {
+    width: 100%;
+    padding: 5px;
+    border: 1px solid #ccc;
+}
+
+.add {
+    margin-top: 20px;
+    background-color: chartreuse;
+    color: #fff;
+    font-size: bold;
+    border: none;
+    outline: none;
+    padding: 10px 20px;
+    border-radius: 10px;
+    display: flex;
+    margin-left: 400px;
+    cursor: pointer;
+}
+
+h1{
+    margin-left: 50px;
+    color: chartreuse;
+    font-size: 40px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.add:hover {
+    transform: scale(0.9);
+}
+
+.search{
+    height: 40px;
+    width: 900px;
+    margin: 40px -190px;
+    cursor: pointer;
+    border: 2px solid #000;
+    border-radius: 10px;
+}
+
+h5{
+    color: chartreuse;
+    font-size: 20px;
+    margin-top: 35px;
+    margin-bottom: 10px;
+    padding-left: 206px;
+}
+
+#product-category{
+    padding-left: 206px;
+    height: 25px;
+    width: 500px;
+    border-radius: 10px;
+}
+
+.container-cart{
+    width: 900px;
+    max-width: 90vw;
+    margin: 10px 20px 10px 470px;
+    text-align: center;
+    padding: 10px 0px 10px;
+    font-family: 'Poppins';
+    font-size: 20px;
+    font-weight: bold;
+    color: chartreuse;
+}
+
+header{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px -4px 100px;
+}
+
+.listProduct .item{
+    width: 50%;
+    filter: drop-shadow(0 50px 20px black);
+
+    background-color: #eeeee6;
+    padding: 20px;
+    border-radius: 20px;
+    text-align: center;
+}
+
+.listProduct{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.listProduct .item h3 {
+    font-weight: 500;
+    font-size: larger;
+}
+
+.listProduct .item .price {
+    font-weight: 500;
+    font-size: smaller;
+}
+
+.listProduct .item button{
+    font-size: bold;
+    border-radius: 20px;
+    border: none;
+    outline: none;
+    padding: 5px 10px;
+    background-color: #353432;
+    cursor: pointer;
+    text-align: center;
+    justify-self: center;
+}
+
+.listProduct .item a{
+    color: #eee;
+    text-decoration: none;
+}
+
+.listProduct .item button:hover {
+    transform: scale(0.9);
+    color: #eee;
+}
+
+.title-price{
+    font-size: 30;
+    color: chartreuse;
+}
+
+/* CSS cho các nút phân trang */
+#pagination-container {
+    display: flex;
+    text-align: center;
+    margin-top: 20px;
+    justify-content: center;
+    align-items: center;
+}
+
+#pagination-container button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    margin: 0 5px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#pagination-container button:hover {
+    background-color: #0056b3;
+}
+
+#pagination-container button.active {
+    background-color: #0056b3;
+    font-weight: bold;
+}
+
+#pagination-container button:disabled {
+    background-color: #ddd;
+    cursor: not-allowed;
+}
+
+/* Style cho select */
+#warehouse-name {
+    width: 100%;
+    padding: 4px;
+    margin-top: 2px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.search-box {
+    width: 100%;
+    position: relative;
+}
+
+.row {
+    display: flex;
+}
+
+.results-box {
+    position: absolute;
+    width: 100%;
+    max-height: 200px;
+    overflow-y: auto;
+    background-color: white;
+    box-shadow: 0 2px 5px rgb(0, 0, 0,0.1);
+    border-radius: 4px;
+}
+
+.results-box ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.results-box li {
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+    cursor: pointer;
+}
+
+.results-box li:hover {
+    background-color: #f0f0f0;
+}
+
+.auth-buttons{
+    margin-left: 1625px;
+}
+
+.auth-buttons button {
+    background-color: #04364A;
+    color: chartreuse;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bolder;
+}
+
+.auth-buttons button:hover {
+    color: #04364A;
+    background-color: red !important;
+}

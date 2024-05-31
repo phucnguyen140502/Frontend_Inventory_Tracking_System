@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventory Tracking System</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="home.css">
+</head>
+<body>
+    <div class="header">
+        <div class="intro">
+            <a class="name" href="home.html">
+                <i class='bx bx-notepad'></i>
+                Inventory Track
+            </a>
+        </div>
+        <div class="pages">
+
+            <nav class="home">
+                <a class="warehouse" href="/warehouse/warehouse.html">Warehouse</a>
+                <a class="product" href="/product/inventory.html">Inventory</a>
+                <a class="supplier" href="/supplier/supplier.html">Supplier</a>
+                <a class="goods-delivery-note" href="/goods_delivery_note/goods_delivery_note.html">Export</a>
+                <a class="goods-received-note" href="/goods_received_note/goods_received_note.html">Import</a>
+            </nav>
+        </div>
+
+    </div>
+
+    <div class="auth-buttons">
+        <button class="login-btn">Log In</button>
+        <button class="signup-btn">Sign Up</button>
+        <button class="logout-btn">Log Out</button>
+    </div>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h2>Welcome to our Inventory Tracking System!</h2>
+            <p>Track your inventory, manage products, and streamline your order process.</p>
+        </div>
+    </section>
+
+    <section class="features">
+        <div class="feature">
+            <img src="https://cdn-icons-png.freepik.com/512/2897/2897785.png" alt="Inventory Icon">
+            <h3>Real-time Inventory Tracking</h3>
+            <p>Stay updated with real-time inventory levels and avoid stockouts.</p>
+        </div>
+        <div class="feature">
+            <img src="https://cdn-icons-png.freepik.com/512/679/679821.png" alt="Product Icon">
+            <h3>Manage Products</h3>
+            <p>Add, edit, and remove products from your inventory with ease.</p>
+        </div>
+        <div class="feature">
+            <img src="https://cdn-icons-png.freepik.com/512/1505/1505442.png" alt="Order Icon">
+            <h3>Streamline Orders</h3>
+            <p>Easily process and manage orders for efficient fulfillment.</p>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2023 Inventory Tracking System. All rights reserved.</p>
+    </footer>
+
+
+    <!-- Login Modal -->
+    <div id="login-modal" class="modal">
+        <div class="modal-content">
+            <h2>Log In</h2>
+            <div class="input-container">
+                <form id="login-form">
+                    <label for="login-email">Email:</label>
+                    <input type="email" id="login-email" name="email" required><br>
+
+                    <label for="login-password">Password:</label>
+                    <div class="input-password">
+                        <input type="password" id="login-password" name="password" required
+                                pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                                placeholder="8+ chars, 1+ Number, 1+ Upper and Lower Case"><br>
+                                
+                    </div>
+                    <button class="add-login" id="add-login" type="submit">Log In</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Signup Modal -->
+    <div id="signup-modal" class="modal">
+        <div class="modal-content">
+            <h2>Sign Up</h2>
+
+                <form id="signup-form">
+                    <label for="signup-name">Name:</label>
+                    <input type="text" id="signup-name" name="name" required><br>
+
+                    <label for="signup-email">Email:</label>
+                    <input type="email" id="signup-email" name="email" required><br>
+
+                    <label for="signup-password">Password:</label>
+
+                    <input type="password" id="signup-password" name="password" required 
+                            pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                            placeholder="8+ chars, 1+ Number, 1+ Upper and Lower Case"><br>
+
+                    <button class="add-signup" id="add-signup" type="submit">Sign Up</button>
+                </form>
+
+        </div>
+    </div>
+
+</body>
+<script src="home.js"></script>
+</html>

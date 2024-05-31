@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Details</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="/details_products/details_product.css">
+</head>
+<body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/express/4.17.1/express.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cors/2.8.5/cors.js"></script>
+    <script src="/details_products/details_product.js"></script>
+
+    <div class="header">
+        <div class="intro">
+            <a class="name" href="../home.html">
+                <i class='bx bx-notepad'></i>
+                Inventory Track
+            </a>
+        </div>
+        <div class="pages">
+
+            <nav class="home">
+                <a class="warehouse" href="/warehouse/warehouse.html">Warehouse</a>
+                <a class="product" href="/product/inventory.html">Inventory</a>
+                <a class="supplier" href="/supplier/supplier.html">Supplier</a>
+                <a class="goods-delivery-note" href="/goods_delivery_note/goods_delivery_note.html">Export</a>
+                <a class="goods-received-note" href="/goods_received_note/goods_received_note.html">Import</a>
+
+            </nav>
+        </div>
+        <div class="auth-buttons">
+            <button class="logout-btn">Log Out</button>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="details">
+            <div class="image">
+                <img src="" alt="">
+            </div>
+            <div class="content">
+                <h2 class="product_name">Name</h2>
+                <h3>Product ID</h3>
+                <div class="product_id"></div>
+                <h3>Price</h3>
+                <div class="price"></div>
+                <input type="number" name="input_unit_price" class="input_unit_price" placeholder="Enter unit price">
+                <h3>Category</h3>
+                <div class="category"></div>
+                <h3>Inventory Quantity</h3>
+                <div class="quantity"></div>
+                <h3>Created At</h3>
+                <div class="created-at"></div>
+                <h3>Updated At</h3>
+                <div class="updated-at"></div>
+                <h3>Warehouse</h3>
+                <div class="warehouse-info">
+                    <h4>ID</h4>
+                    <div class="warehouse_id"></div>
+                    <h4>Name</h4>
+                    <div class="warehouse_name"></div>
+                    <input type="text" name="input_warehouse_name" class="input_warehouse_name" placeholder="Enter warehouse name">
+                    <h4>Location</h4>
+                    <div class="warehouse_location"></div>
+                    <h4>Capacity</h4>
+                    <div class="warehouse_capacity"></div>
+                </div>
+
+                <div class="buttons">
+                    <button class="update">UPDATE</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="suppliers">
+        <div class="title"><h2>SUPPLIER(S)</h2></div>
+
+        <table id="supplier-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Phone Number</th>
+                    <th>Email</th>
+                </tr>
+            </thead>
+            <tbody id="supplier-table-body">
+                <!-- Supplier data will be insert here -->
+
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

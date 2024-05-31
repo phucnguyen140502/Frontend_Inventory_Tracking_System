@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Warehouse</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="/warehouse/warehouse.css">
+</head>
+<body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/express/4.17.1/express.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cors/2.8.5/cors.js"></script>
+    <script src="/warehouse/warehouse.js"></script>
+    <div class="header">
+        <div class="intro">
+            <a class="name" href="../home.html">
+                <i class='bx bx-notepad'></i>
+                Inventory Track
+            </a>
+        </div>
+        <div class="pages">
+
+            <nav class="home">
+                <a class="warehouse" href="/warehouse/warehouse.html">Warehouse</a>
+                <a class="product" href="/product/inventory.html">Inventory</a>
+                <a class="supplier" href="/supplier/supplier.html">Supplier</a>
+                <a class="goods-delivery-note" href="/goods_delivery_note/goods_delivery_note.html">Export</a>
+                <a class="goods-received-note" href="/goods_received_note/goods_received_note.html">Import</a>
+
+            </nav>
+        </div>
+        <div class="auth-buttons">
+            <button class="logout-btn">Log Out</button>
+        </div>
+    </div>
+
+    
+
+    <div class="container">
+        <h1>Add A New Warehouse</h1>
+        <div class="input-container">
+            <form action="">
+                <label for="warehouse-name">Name</label>
+                <input id="warehouse-name" type="text" name="warehouse-name" placeholder="name" required><br>
+            
+                <label for="warehouse-location">Location</label>
+                <input id="warehouse-location" type="text" name="warehouse-location" placeholder="location" required><br>
+
+                <label for="warehouse-capacity">Capacity</label>
+                <input id="warehouse-capacity" type="number" name="warehouse-capacity" placeholder="capacity" required><br>
+
+            
+                <button id="add-warehouse" class="add" type="submit" onclick="addWarehouse()">ADD</button>
+
+            </form>
+
+        </div>
+
+        <input class="search" type="text" placeholder="Type here to search" required><br>
+
+
+    </div>
+
+
+    <div>
+
+
+        <table id="warehouse-table">
+            <caption><h2>Warehouse List</h2></caption>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Location</th>
+                    <th>Capacity</th>
+                    <th>Created At</th>
+                    <th>Updated At</th>
+                    <th>Options</th>
+                </tr>
+            </thead>
+            <tbody id="warehouse-table-body">
+                <!-- Warehouse data will be insert here -->
+
+            </tbody>
+        </table>
+
+
+
+    </div>
+
+    <div id="pagination-container"></div>
+
+
+</body>
+</html>

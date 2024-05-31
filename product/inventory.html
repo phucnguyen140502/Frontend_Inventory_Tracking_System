@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventory</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="/product/inventory.css">
+</head>
+<body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/express/4.17.1/express.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cors/2.8.5/cors.js"></script>
+    <script src="/product/inventory.js"></script>
+    <div class="header">
+        <div class="intro">
+            <a class="name" href="../home.html">
+                <i class='bx bx-notepad'></i>
+                Inventory Track
+            </a>
+        </div>
+        <div class="pages">
+
+            <nav class="home">
+                <a class="warehouse" href="/warehouse/warehouse.html">Warehouse</a>
+                <a class="product" href="/product/inventory.html">Inventory</a>
+                <a class="supplier" href="/supplier/supplier.html">Supplier</a>
+                <a class="goods-delivery-note" href="/goods_delivery_note/goods_delivery_note.html">Export</a>
+                <a class="goods-received-note" href="/goods_received_note/goods_received_note.html">Import</a>
+
+            </nav>
+        </div>
+        <div class="auth-buttons">
+            <button class="logout-btn">Log Out</button>
+        </div>
+    </div>
+
+
+    <div class="container">
+        <h1 id="title">Add A New Product</h1>
+        <div class="input-container">
+            <form action="">
+
+                <label for="product-name">Name</label>
+                <input type="text" name="product-name" placeholder="name" required><br>
+
+                <label for="product-category">Category</label>
+                <input type="text" name="product-category" placeholder="category" required><br>
+
+                <label for="unit-price">Unit Price</label>
+                <input type="text" name="unit-price" placeholder="unit price" required><br>
+
+                <label for="warehouse-name">Warehouse Name</label>
+                <div class="search-box">
+                    <div class="row">
+                        <input type="text" name="warehouse-name" id="warehouse-name" placeholder="warehouse name" autocomplete="off" required>
+                    </div>
+
+                    <div class="results-box" id ="results-box">
+                        
+                    </div>
+                </div>
+                
+                <button id="add-Product" class="add" type="submit">ADD</button>
+
+            </form>
+        </div>
+
+        <label class="category" for="product-category"><h5>Category</h5></label>
+        <select id="product-category" name="product-category">
+            <!-- Category data will be insert here -->
+            
+        </select>
+
+        <input class="search" type="text" placeholder="Type here to search" required><br>
+
+    </div>
+
+
+    <div class="container-cart">
+        <header>
+            <div class="title">PRODUCT LIST</div>
+        </header>
+    </div>
+
+    <div class="listProduct">
+        <div class="item">
+            
+        </div>
+    </div>
+
+    <div id="pagination-container"></div>
+
+</body>
+</html>
