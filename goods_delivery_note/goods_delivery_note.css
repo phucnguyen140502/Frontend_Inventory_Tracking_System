@@ -207,7 +207,7 @@ tr:hover {
     cursor: not-allowed;
 }
 
-.search-box {
+.search-box-product {
     width: 100%;
     position: relative;
 }
@@ -216,7 +216,7 @@ tr:hover {
     display: flex;
 }
 
-.results-box {
+.results-box-product {
     position: absolute;
     width: 100%;
     max-height: 200px;
@@ -226,19 +226,19 @@ tr:hover {
     border-radius: 4px;
 }
 
-.results-box ul {
+.results-box-product ul {
     list-style-type: none;
     padding: 0;
     margin: 0;
 }
 
-.results-box li {
+.results-box-product li {
     padding: 10px;
     border-bottom: 1px solid #ccc;
     cursor: pointer;
 }
 
-.results-box li:hover {
+.results-box-product li:hover {
     background-color: #f0f0f0;
 }
 

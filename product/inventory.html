@@ -13,28 +13,33 @@
     <script src="/product/inventory.js"></script>
     <div class="header">
         <div class="intro">
-            <a class="name" href="../index.html">
+            <a class="name" href="../home.html">
                 <i class='bx bx-notepad'></i>
                 Inventory Track
             </a>
         </div>
         <div class="pages">
+
             <nav class="home">
                 <a class="warehouse" href="/warehouse/warehouse.html">Warehouse</a>
                 <a class="product" href="/product/inventory.html">Inventory</a>
                 <a class="supplier" href="/supplier/supplier.html">Supplier</a>
                 <a class="goods-delivery-note" href="/goods_delivery_note/goods_delivery_note.html">Export</a>
                 <a class="goods-received-note" href="/goods_received_note/goods_received_note.html">Import</a>
+
             </nav>
         </div>
         <div class="auth-buttons">
             <button class="logout-btn">Log Out</button>
         </div>
     </div>
+
+
     <div class="container">
         <h1 id="title">Add A New Product</h1>
         <div class="input-container">
-            <form>
+            <form action="">
+
                 <label for="product-name">Name</label>
                 <input type="text" name="product-name" placeholder="name" required><br>
 
@@ -49,27 +54,41 @@
                     <div class="row">
                         <input type="text" name="warehouse-name" id="warehouse-name" placeholder="warehouse name" autocomplete="off" required>
                     </div>
-                    <div class="results-box" id="results-box"></div>
+
+                    <div class="results-box" id ="results-box">
+                        
+                    </div>
                 </div>
+                
                 <button id="add-Product" class="add" type="submit">ADD</button>
+
             </form>
         </div>
 
         <label class="category" for="product-category"><h5>Category</h5></label>
-        <select id="product-category" name="product-category">
-            <!-- Category data will be inserted here -->
+        <select id="product-category-selection" name="product-category">
+            <!-- Category data will be insert here -->
+            
         </select>
 
         <input class="search" type="text" placeholder="Type here to search" required><br>
+
     </div>
+
+
     <div class="container-cart">
         <header>
             <div class="title">PRODUCT LIST</div>
         </header>
     </div>
+
     <div class="listProduct">
-        <div class="item"></div>
+        <div class="item">
+            
+        </div>
     </div>
+
     <div id="pagination-container"></div>
+
 </body>
 </html>

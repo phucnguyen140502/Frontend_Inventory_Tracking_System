@@ -1,75 +1,57 @@
 let ProductAPI = `https://backend-inventory-tracking-system.onrender.com/products`;
 let pageSize = 4;
 
-function checkDiv(a, b) {
-    return a % b == 0;
+function checkDiv(a, b){s
+    return a%b==0;
 }
 
-let totalPages = new Promise((resolve, reject) => {
-    getProduct(function (data) {
+let totalPages= new Promise((resolve, reject) => {
+    getProduct(function(data) {
         if (data.error) {
             reject('Supplier not found.');
         } else if (checkDiv(data.products.length, pageSize)) {
             resolve(Math.floor(data.products.length / pageSize));
-        } else {
+            } else {
             resolve(Math.floor(data.products.length / pageSize) + 1);
-        }
+            }
     });
 });
-
+// Define the start function
 function start() {
     const authToken = localStorage.getItem('authToken');
     if (!authToken) {
-        alert("Please, login");
-        window.location.href = '/index.html'; // Redirect to login page
-        return;
+        alert("Please, login")
+        window.location.href = '/home.html'; // Redirect to login page
     }
-    
-    Promise.all([totalPages])
-        .then(([totalPages]) => {
-            paginateProduct(1, function (data) {
-                console.log(totalPages);
-                renderProduct(data.Product);
-                renderPagination(totalPages, 1);
-            });
-            handleCreateForm();
-        })
-        .catch((error) => console.error(error));
 
-    getCategories(function (data) {
+    Promise.all([totalPages])
+    .then(([totalPages]) => {
+        paginateProduct(1, function(data) {
+            console.log(totalPages);
+            renderProduct(data.Product);
+            renderPagination(totalPages, 1);
+        });
+        handleCreateForm();
+    })
+
+    getCategories(function(data) {
         console.log(data);
         renderCategoriesInDropdown(data.categories);
     });
 
-    let categorySelect = document.getElementById('product-category');
-    if (categorySelect) {
-        categorySelect.addEventListener('change', function () {
-            let selectedCategory = categorySelect.value;
-            console.log(selectedCategory);
-            if (selectedCategory !== '') {
-                queryProductsByCategory(selectedCategory, function (data) {
-                    console.log(data.Product);
-                    renderProduct(data.Product);
-                });
-            } else {
-                getProduct(function (data) {
-                    console.log(data.Product);
-                    renderProduct(data.Product);
-                });
-            }
-        });
-    }
+    
     loadWarehouseName();
 
     const logoutBtn = document.querySelector(".logout-btn");
-    if (logoutBtn) {
-        logoutBtn.onclick = () => {
-            localStorage.removeItem('authToken');
-            alert("Logged out!");
-            window.location.href = '/index.html'; // Redirect to login page
-        };
+
+    // Handle logout
+    logoutBtn.onclick = () => {
+        localStorage.removeItem('authToken');
+        alert("Logged out!");
+        window.location.href = '/home.html'; // Redirect to login page
     }
 }
+
 
 function paginateProduct(page, callback) {
     const authToken = localStorage.getItem('authToken');
@@ -82,18 +64,19 @@ function paginateProduct(page, callback) {
             }
         }
     )
-        .then(function (response) {
-            return response.json();
-        })
-        .then(callback)
-        .catch(function (error) {
-            console.log(error);
-        });
+    .then(function(response) {
+        return response.json();
+    })
+    .then(callback)
+    .catch(function(error) {
+        console.log(error);
+    });
 }
 
+// Hàm để lấy dữ liệu warehouse từ server dựa trên tên
 function getWarehouseDataByName(name, callback) {
     const authToken = localStorage.getItem('authToken');
-    fetch(`https://backend-inventory-tracking-system.onrender.com/warehouse/${name}`,
+    fetch("https://backend-inventory-tracking-system.onrender.com/warehouse/"+ name,
         {
             method: "GET",
             headers: {
@@ -102,33 +85,43 @@ function getWarehouseDataByName(name, callback) {
             }
         }
     )
-        .then(function (response) {
+        .then(function(response) {
             return response.json();
         })
         .then(callback)
-        .catch(function (error) {
+        .catch(function(error) {
             console.log(error);
         });
 }
+
+
 
 function getCategories(callback) {
     const authToken = localStorage.getItem('authToken');
-    fetch('https://backend-inventory-tracking-system.onrender.com/category',
-        {
-            method: "GET",
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${authToken}`
-            }
+    fetch('https://backend-inventory-tracking-system.onrender.com/category', {
+        method: "GET",
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${authToken}`
         }
-    )
-        .then(function (response) {
-            return response.json();
-        })
-        .then(callback)
-        .catch(function (error) {
-            console.log(error);
-        });
+    })
+    .then(function(response) {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+    })
+    .then(function(data) {
+        if (data.categories) {
+            callback(data);
+        } else {
+            callback({ categories: [] });
+        }
+    })
+    .catch(function(error) {
+        console.error('Error fetching categories:', error);
+        callback({ categories: [] });
+    });
 }
 
 let availableKeywords = [];
@@ -143,7 +136,7 @@ function loadWarehouseName() {
             }
         }
     )
-        .then(function (response) {
+        .then(function(response) {
             return response.json();
         })
         .then(data => {
@@ -152,25 +145,23 @@ function loadWarehouseName() {
             const inputBox = document.getElementById('warehouse-name');
             const resultsBox = document.getElementById('results-box');
 
-            if (inputBox && resultsBox) {
-                inputBox.addEventListener('input', () => {
-                    let filteredKeywords = [];
-                    const query = inputBox.value.toLowerCase();
-                    if (query.length) {
-                        filteredKeywords = availableKeywords.filter(keyword => keyword.toLowerCase().includes(query));
-                    }
-                    console.log(filteredKeywords);
-                    displayResults(filteredKeywords, resultsBox);
+            inputBox.addEventListener('input', () => {
+                let filteredKeywords = [];
+                const query = inputBox.value.toLowerCase();
+                if(query.length){
+                    filteredKeywords = availableKeywords.filter(keyword => keyword.toLowerCase().includes(query));
+                }
+                console.log(filteredKeywords);
+                displayResults(filteredKeywords, resultsBox);
 
-                    if (!filteredKeywords.length) {
-                        resultsBox.innerHTML = '';
-                    }
-                });
-            }
+                if (!filteredKeywords.length) {
+                    resultsBox.innerHTML = '';
+                }
+            });
         })
-        .catch(function (error) {
+        .catch(function(error) {
             console.log(error);
-        });
+        })
 }
 
 function displayResults(results, resultsBox) {
@@ -183,18 +174,13 @@ function displayResults(results, resultsBox) {
 
 function selectInput(value) {
     const inputBox = document.getElementById('warehouse-name');
-    if (inputBox) {
-        inputBox.value = value;
-        const resultsBox = document.getElementById('results-box');
-        if (resultsBox) {
-            resultsBox.innerHTML = '';
-        }
-    }
+    inputBox.value = value;
+    document.getElementById('results-box').innerHTML = '';
 }
 
 function queryProductsByCategory(category, callback) {
     const authToken = localStorage.getItem('authToken');
-    fetch(`https://backend-inventory-tracking-system.onrender.com/category/${category}`,
+    fetch("https://backend-inventory-tracking-system.onrender.com/category" + "/" + category,
         {
             method: "GET",
             headers: {
@@ -203,15 +189,17 @@ function queryProductsByCategory(category, callback) {
             }
         }
     )
-        .then(function (response) {
+        .then(function(response) {
             return response.json();
         })
         .then(callback)
-        .catch(function (error) {
+        .catch(function(error) {
             console.log(error);
         });
 }
 
+
+// Define the function to fetch Product data from the server
 function getProduct(callback) {
     const authToken = localStorage.getItem('authToken');
     fetch(ProductAPI,
@@ -223,11 +211,11 @@ function getProduct(callback) {
             }
         }
     )
-        .then(function (response) {
+        .then(function(response) {
             return response.json();
         })
         .then(callback)
-        .catch(function (error) {
+        .catch(function(error) {
             console.log(error);
         });
 }
@@ -243,13 +231,13 @@ function createProduct(data, callback) {
         body: JSON.stringify(data)
     };
     fetch(ProductAPI, options)
-        .then(function (response) {
+        .then(function(response) {
             console.log("create successful");
             console.log(data);
             return response.json();
         })
         .then(callback)
-        .catch(function (error) {
+        .catch(function(error) {
             console.log(error);
         });
 }
@@ -265,11 +253,11 @@ function queryProducts(name, callback) {
             }
         }
     )
-        .then(function (response) {
+        .then(function(response) {
             return response.json();
         })
         .then(callback)
-        .catch(function (error) {
+        .catch(function(error) {
             console.log(error);
         });
 }
@@ -285,12 +273,15 @@ function renderPagination(totalPages, currentPage) {
         if (i === currentPage) {
             button.classList.add('active');
         }
-        button.onclick = (function (page) {
-            console.log(page);
-            return function () {
-                paginateProduct(page, function (data) {
+        button.onclick = (function(page) {
+            console.log(page)
+            return function() {
+                paginateProduct(page, function(data) {
                     renderProduct(data.Product);
-                    renderPagination(totalPages, page);
+                    Promise.all([totalPages])
+                    .then(([totalPages]) => {
+                        renderPagination(totalPages, current);
+                    })
                 });
             };
         })(i);
@@ -298,101 +289,129 @@ function renderPagination(totalPages, currentPage) {
     }
 }
 
+// Define the function to render Product data on the web page
 function renderProduct(Products) {
+
     let listProductHTML = document.querySelector('.listProduct');
 
     listProductHTML.innerHTML = '';
 
-    Products.forEach(product => {
-        let newProduct = document.createElement('div');
-        newProduct.classList.add('item');
-        newProduct.innerHTML = `
-            <h3>${product.name}</h3>
-            <div class="title-price">Unit Price</div>
-            <div class="price">${"$" + product.unit_price}</div>
-            <nav>
+        Products.forEach(product => {
+            let newProduct = document.createElement('div');
+            newProduct.classList.add('item');
+            newProduct.innerHTML = `
+                <h3>${product.name}</h3>
+                <div class="title-price">Unit Price</div>
+                <div class="price">${"$" + product.unit_price}</div>
+                <nav>
                 <button><a class="details" href="/details_products/details_product.html?product_id=${product.product_id}">DETAILS</a></button>
-            </nav>
-        `;
-        listProductHTML.appendChild(newProduct);
-    });
+                </nav>
+            `;
+            listProductHTML.appendChild(newProduct);
 
-    let searchInput = document.querySelector('.search');
-    if (searchInput) {
-        searchInput.addEventListener('keyup', function (event) {
+
+        });
+
+        let searchInput = document.querySelector('.search');
+        searchInput.addEventListener('keyup', function(event) {
             if (event.keyCode === 13) {
+                // 13 là mã phím cho phím Enter
                 let searchQuery = searchInput.value.trim(); // Lấy giá trị từ ô tìm kiếm và loại bỏ khoảng trắng đầu cuối
-                if (searchQuery === '') {
-                    paginateProduct(1, function (data) {
+                if(searchQuery == ''){
+                    paginateProduct(1, function(data) {
                         renderProduct(data.Product);
-                        renderPagination(totalPages, 1);
+                        Promise.all([totalPages])
+                        .then(([totalPages]) => {
+                            renderPagination(totalPages, 1);
+                        })
+                        
                     });
                 } else {
-                    queryProducts(searchQuery, function (data) {
+                    queryProducts(searchQuery, function(data) {
                         renderProduct(data.Product);
-                        renderPagination(totalPages, 1);
+                        Promise.all([totalPages])
+                        .then(([totalPages]) => {
+                            renderPagination(totalPages, 1);
+                        })
                     });
                 }
             }
         });
-    }
+
+
 }
 
 function renderCategoriesInDropdown(categories) {
-    let categorySelect = document.getElementById('product-category');
+    let categorySelect = document.getElementById('product-category-selection');
+    
+    // Clear all existing options
+    categorySelect.innerHTML = '';
 
-    if (categorySelect) {
-        categorySelect.innerHTML = '';
-        categories.forEach(function (category) {
+    // Check if categories is an array and not null
+    if (Array.isArray(categories) && categories.length > 0) {
+        // Add an option for each category to the select
+        categories.forEach(function(category) {
             let option = document.createElement('option');
+            console.log(category);
             option.value = category;
             option.textContent = category;
             categorySelect.appendChild(option);
         });
+    } else {
+        // Handle case where no categories are available
+        let option = document.createElement('option');
+        option.value = '';
+        option.textContent = '';
+        categorySelect.appendChild(option);
     }
 }
 
+
+// Thêm sự kiện cho nút thêm sản phẩm
 function handleCreateForm() {
     let addButton = document.getElementById('add-Product');
 
-    if (addButton) {
-        addButton.addEventListener('click', function (event) {
-            event.preventDefault();
-            let name = document.querySelector('input[name="product-name"]').value;
-            let category = document.querySelector('input[name="product-category"]').value;
-            let unitPrice = parseFloat(document.querySelector('input[name="unit-price"]').value);
-            let warehouseName = document.querySelector('input[name="warehouse-name"]').value;
+    addButton.addEventListener('click', function() {
+        let name = document.querySelector('input[name="product-name"]').value;
+        let category = document.querySelector('input[name="product-category"]').value; // Corrected to get the value from the dropdown
+        let unitPrice = parseFloat(document.querySelector('input[name="unit-price"]').value);
+        let warehouseName = document.getElementById('warehouse-name').value; // Changed to get the value from the input field
+        console.log(name);
+        console.log(category);
+        console.log(unitPrice);
+        console.log(warehouseName);
+        // Gọi hàm để lấy thông tin warehouse dựa trên tên
+        getWarehouseDataByName(warehouseName, function(data) {
+            if (data.error) {
+                alert('Warehouse not found.');
+            } else {
+                console.log(data.Warehouses[0]);
+                let warehouseId = data.Warehouses[0].warehouse_id;
+                let ProductForm = {
+                    name: name,
+                    category: category,
+                    unit_price: unitPrice,
+                    warehouse_id: warehouseId,
+                    created_at: new Date().toLocaleString().slice(0, 19).replace("T", " "), // Thêm giá trị thời gian hiện tại vào created_at
+                    updated_at: new Date().toLocaleString().slice(0, 19).replace("T", " ") // Thêm giá trị thời gian hiện tại vào updated_at
+                };
 
-            console.log(name);
-            console.log(category);
-            console.log(unitPrice);
-            console.log(warehouseName);
-
-            getWarehouseDataByName(warehouseName, function (data) {
-                if (data.error) {
-                    alert('Warehouse not found.');
-                } else {
-                    console.log(data.Warehouses[0]);
-                    let warehouseId = data.Warehouses[0].warehouse_id;
-                    let ProductForm = {
-                        name: name,
-                        category: category,
-                        unit_price: unitPrice,
-                        warehouse_id: warehouseId,
-                        created_at: new Date().toLocaleString().slice(0, 19).replace("T", " "),
-                        updated_at: new Date().toLocaleString().slice(0, 19).replace("T", " ")
-                    };
-
-                    createProduct(ProductForm, function () {
-                        paginateProduct(1, function (data) {
-                            console.log(data);
-                            renderProduct(data.Product);
+                // Tạo sản phẩm mới sau khi xác nhận
+                createProduct(ProductForm, function() {
+                    paginateProduct(1, function(data) {
+                        console.log(data);
+                        renderProduct(data.Product);
+                        Promise.all([totalPages])
+                        .then(([totalPages]) => {
+                            renderPagination(totalPages, 1);
                         });
                     });
-                }
-            });
+                });
+            }
         });
-    }
+    });
 }
+
+
 
 document.addEventListener('DOMContentLoaded', start);

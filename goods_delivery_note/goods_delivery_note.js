@@ -22,7 +22,7 @@ function start() {
     const authToken = localStorage.getItem('authToken');
     if (!authToken) {
         alert("Please, login")
-        window.location.href = '/index.html'; // Redirect to login page
+        window.location.href = '/home.html'; // Redirect to login page
     }
     Promise.all([totalPages])
     .then(([totalPages]) => {
@@ -40,8 +40,9 @@ function start() {
     logoutBtn.onclick = () => {
         localStorage.removeItem('authToken');
         alert("Logged out!");
-        window.location.href = '/index.html'; // Redirect to login page
+        window.location.href = '/home.html'; // Redirect to login page
     }
+    fetchProductNames();
 
 }
 
@@ -64,6 +65,56 @@ function getExport(callback) {
         .catch(function(error) {
             console.log(error);
         });
+}
+
+let availableKeywordsProduct = [];
+function fetchProductNames() {
+    const authToken = localStorage.getItem('authToken');
+    fetch('https://backend-inventory-tracking-system.onrender.com/products/product-name',
+        {
+            method: "GET",
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${authToken}`
+            }
+        }
+    )
+        .then(response => response.json())
+        .then(data => {
+            availableKeywordsProduct = data.names;
+            console.log(availableKeywordsProduct);
+            const inputBox = document.getElementById('product-name');
+            const resultsBox = document.getElementById('results-box-product');
+
+            inputBox.addEventListener('input', () => {
+                let filteredKeywords = [];
+                const query = inputBox.value.toLowerCase();
+                if(query.length){
+                    filteredKeywords = availableKeywordsProduct.filter(keyword => keyword.toLowerCase().includes(query));
+                }
+                console.log(filteredKeywords);
+                displayResultsProduct(filteredKeywords, resultsBox);
+
+                if (!filteredKeywords.length) {
+                    resultsBox.innerHTML = '';
+                }
+            });
+        })
+        .catch(error => console.log(error));
+}
+
+function displayResultsProduct(results, resultsBox) {
+    console.log(results);
+    if (results.length) {
+        const content = results.map(item => `<li onclick="selectInputProduct('${item}')">${item}</li>`).join('');
+        resultsBox.innerHTML = `<ul>${content}</ul>`;
+    }
+}
+
+function selectInputProduct(value) {
+    const inputBox = document.getElementById('product-name');
+    inputBox.value = value;
+    document.getElementById('results-box-product').innerHTML = '';
 }
 
 function createExport(data, callback) {
