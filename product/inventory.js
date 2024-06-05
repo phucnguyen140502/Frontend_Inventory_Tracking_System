@@ -1,7 +1,7 @@
 let ProductAPI = `https://backend-inventory-tracking-system.onrender.com/products`;
 let pageSize = 4;
 
-function checkDiv(a, b){s
+function checkDiv(a, b){
     return a%b==0;
 }
 
