@@ -465,6 +465,7 @@ function renderImport(GoodsReceivedNotes) {
 function handleCreateForm() {
     let addButton = document.getElementById('add-Import');
     addButton.addEventListener('click', function() {
+        event.preventDefault(); // Prevent the default form submission
         console.log('aaa');
         let supplierName = document.querySelector('input[name="supplier-name"]').value;
         let productName = document.querySelector('input[name="product-name"]').value;
