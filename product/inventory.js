@@ -372,6 +372,8 @@ function handleCreateForm() {
     let addButton = document.getElementById('add-Product');
 
     addButton.addEventListener('click', function() {
+        event.preventDefault(); // Prevent the default form submission
+
         let name = document.querySelector('input[name="product-name"]').value;
         let category = document.querySelector('input[name="product-category"]').value; // Corrected to get the value from the dropdown
         let unitPrice = parseFloat(document.querySelector('input[name="unit-price"]').value);
