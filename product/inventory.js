@@ -98,7 +98,7 @@ function getWarehouseDataByName(name, callback) {
 
 function getCategories(callback) {
     const authToken = localStorage.getItem('authToken');
-    fetch('http://localhost:3000/category', {
+    fetch('https://backend-inventory-tracking-system.onrender.com/category', {
         method: "GET",
         headers: {
             'Content-Type': 'application/json',
@@ -127,7 +127,7 @@ function getCategories(callback) {
 let availableKeywords = [];
 function loadWarehouseName() {
     const authToken = localStorage.getItem('authToken');
-    fetch('http://localhost:3000/warehouse/warehouse-name',
+    fetch('https://backend-inventory-tracking-system.onrender.com/warehouse/warehouse-name',
         {
             method: "GET",
             headers: {
@@ -180,7 +180,7 @@ function selectInput(value) {
 
 function queryProductsByCategory(category, callback) {
     const authToken = localStorage.getItem('authToken');
-    fetch("http://localhost:3000/category" + "/" + category,
+    fetch("https://backend-inventory-tracking-system.onrender.com/category" + "/" + category,
         {
             method: "GET",
             headers: {
