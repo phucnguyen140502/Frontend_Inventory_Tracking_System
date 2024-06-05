@@ -31,12 +31,14 @@ function start() {
             renderPagination(totalPages, 1);
         });
         handleCreateForm();
-    })
-
-    getCategories(function(data) {
+        
+        getCategories(function(data) {
         console.log(data);
         renderCategoriesInDropdown(data.categories);
     });
+    })
+
+    
 
     let categorySelect = document.getElementById('product-category');
     categorySelect.addEventListener('change', function() {
