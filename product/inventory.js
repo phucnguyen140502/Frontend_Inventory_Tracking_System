@@ -37,7 +37,7 @@ function start() {
     getCategories(function(data) {
         console.log(data);
         renderCategoriesInDropdown(data.categories);
-    });
+    })
 
 
     let categorySelect = document.getElementById('product-category');
