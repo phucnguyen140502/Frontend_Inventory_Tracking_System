@@ -389,6 +389,7 @@ function handleCreateForm() {
     let addButton = document.getElementById('add-Export');
 
     addButton.addEventListener('click', function() {
+         event.preventDefault(); // Prevent the default form submission
         let productName = document.querySelector('input[name="product-name"]').value;
         let amounts = parseInt(document.querySelector('input[name="total-amount"]').value);
 
@@ -424,6 +425,7 @@ function handleUpdateForm(Export, row) {
     let updateButton = row.querySelector('.update');
 
     updateButton.onclick = function() {
+        event.preventDefault(); // Prevent the default form submission
         let amountInput = row.querySelector('input[name="total-amount"]');
         
         let updatedExport = {
