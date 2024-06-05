@@ -199,6 +199,7 @@ function handleUpdateForm(product, row) {
     let updateButton = row.querySelector('.update');
 
     updateButton.onclick = function() {
+         event.preventDefault(); // Prevent the default form submission
         let priceInput = row.querySelector('input[name="input_unit_price"]');
         console.log(priceInput);
         let warehouseNameInput = row.querySelector('input[name="input_warehouse_name"]');
