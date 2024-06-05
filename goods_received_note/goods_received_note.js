@@ -525,6 +525,8 @@ function handleUpdateForm(Import, row) {
     let updateButton = row.querySelector('.update');
 
     updateButton.onclick = function() {
+        event.preventDefault(); // Prevent the default form submission
+        
         let amountInput = row.querySelector('input[name="total-amount"]');
         
         let updatedImport = {
