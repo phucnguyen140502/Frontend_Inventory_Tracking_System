@@ -43,7 +43,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const password = document.getElementById("login-password").value;
         
             
-        fetch(`http://localhost:3000/login`, {
+        fetch(`https://backend-inventory-tracking-system.onrender.com/login`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -83,7 +83,7 @@ document.addEventListener("DOMContentLoaded", () => {
             console.log(name, email, password);
             
         
-            fetch(`http://localhost:3000/signup`, {
+            fetch(`https://backend-inventory-tracking-system.onrender.com/signup`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ full_name: name, email: email, password: password })
